@@ -1,2 +1,2 @@
-rootProject.name = "BracketsAdder"
+rootProject.name = "GetCommentsGithub"
 
