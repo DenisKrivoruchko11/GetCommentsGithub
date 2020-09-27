@@ -1,14 +1,28 @@
 import utils.WordsCounter
 import utils.WordsGetter
 
-private fun getWords(): List<Pair<String, Int>> {
-    val data = WordsGetter().getWords()
+private fun getWords(input: String, commitsQuantity: Int, wordsQuantity: Int): List<String> {
+    val commitsMessages = WordsGetter(input).getCommitsData(commitsQuantity)
 
-    return WordsCounter().getWordsCount(data)
+    return WordsCounter().getWordsList(wordsQuantity, commitsMessages)
 }
 
 fun main() {
-    println("Most popular words:")
+    try {
+        println("")
+        val input = readLine() ?: throw KotlinNullPointerException("Input must be non-empty.")
 
-    getWords().forEach { println("${it.first}: ${it.second}") }
+        println("")
+        val commitsQuantity = readLine()?.toIntOrNull() ?: throw KotlinNullPointerException("Input must be a number.")
+
+        println("")
+        val wordsQuantity = readLine()?.toIntOrNull() ?: throw KotlinNullPointerException("Input must be a number.")
+
+        val result = getWords(input, commitsQuantity, wordsQuantity)
+        result.forEach { println(it) }
+    } catch (e: KotlinNullPointerException) {
+        println(e.message)
+    } finally {
+        println("Program stopped.")
+    }
 }
