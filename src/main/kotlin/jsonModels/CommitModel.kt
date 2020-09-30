@@ -15,7 +15,7 @@ data class Commit(
     val tree: CommitData,
     @SerializedName("comment_count")
     val commentCount: Int,
-    val verification: Verification
+    val verification: VerificationModel
 )
 
 data class CommitInfo(
@@ -32,5 +32,3 @@ data class CommitInfo(
     val committer: ParticipantData,
     val parents: List<CommitData>
 )
-
-

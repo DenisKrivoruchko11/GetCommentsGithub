@@ -49,9 +49,12 @@ class WordsGetter(private val baseUrl: String) {
         val heap = Heap<Date, String>(commitsQuantity)
 
         //getData<Branch>
+
         val branches = getBranches(URL("${baseUrl}branches"))
         branches.forEach {
+
             //getData<CommitInfo>
+
             val commits = getCommits(URL("${baseUrl}commits?per_page=$commitsQuantity&sha=${it.name}"))
 
             commits.forEach { commit -> heap.tryToAdd(HeapItem(commit.commit.author.date, commit.commit.message)) }

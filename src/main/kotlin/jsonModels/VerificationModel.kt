@@ -1,6 +1,6 @@
 package jsonModels
 
-data class Verification(
+data class VerificationModel(
     val verified: Boolean?,
     val reason: String?,
     val signature: String?,
