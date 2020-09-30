@@ -1,13 +1,17 @@
 package jsonModels
 
+import com.google.gson.annotations.SerializedName
+
 data class RequiredStatusChecks(
-    val enforcement_level: Boolean,
+    @SerializedName("enforcement_level")
+    val enforcementLevel: Boolean,
     val contexts: List<String>
 )
 
 data class Protection(
     val enabled: Boolean,
-    val required_status_checks: RequiredStatusChecks
+    @SerializedName("required_status_checks")
+    val requiredStatusChecks: RequiredStatusChecks
 )
 
 data class Branch(
@@ -15,5 +19,6 @@ data class Branch(
     val commit: CommitData,
     val protected: Boolean,
     val protection: Protection,
-    val protection_url: String
+    @SerializedName("protection_url")
+    val protectionUrl: String
 )

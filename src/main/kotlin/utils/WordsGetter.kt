@@ -8,7 +8,7 @@ import models.Heap
 import models.HeapItem
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
+import java.util.Date
 
 private fun <T> getData(url: URL): List<T> {
     return with(url.openConnection() as HttpURLConnection) {
@@ -48,9 +48,11 @@ class WordsGetter(private val baseUrl: String) {
     fun getCommitsData(commitsQuantity: Int): List<String> {
         val heap = Heap<Date, String>(commitsQuantity)
 
-        val branches = getBranches(URL("${baseUrl}branches"))//getData<Branch>(URL("${baseUrl}branches"))
+        //getData<Branch>
+        val branches = getBranches(URL("${baseUrl}branches"))
         branches.forEach {
-            val commits = getCommits(URL("${baseUrl}commits?per_page=$commitsQuantity&sha=${it.name}"))//getData<CommitInfo>(URL("${baseUrl}commits?per_page=100&sha=${it.name}"))
+            //getData<CommitInfo>
+            val commits = getCommits(URL("${baseUrl}commits?per_page=$commitsQuantity&sha=${it.name}"))
 
             commits.forEach { commit -> heap.tryToAdd(HeapItem(commit.commit.author.date, commit.commit.message)) }
         }
