@@ -21,14 +21,36 @@ private fun <T> getData(url: URL): List<T> {
     }
 }
 
+private fun getBranches(url: URL): List<Branch> {
+    return with(url.openConnection() as HttpURLConnection) {
+        requestMethod = "GET"
+
+        val data = inputStream.bufferedReader()
+
+        val type = object : TypeToken<List<Branch>>() {}.type
+        Gson().fromJson(data, type)
+    }
+}
+
+private fun getCommits(url: URL): List<CommitInfo> {
+    return with(url.openConnection() as HttpURLConnection) {
+        requestMethod = "GET"
+
+        val data = inputStream.bufferedReader()
+
+        val type = object : TypeToken<List<CommitInfo>>() {}.type
+        Gson().fromJson(data, type)
+    }
+}
+
 class WordsGetter(private val baseUrl: String) {
 
     fun getCommitsData(commitsQuantity: Int): List<String> {
         val heap = Heap<Date, String>(commitsQuantity)
 
-        val branches = getData<Branch>(URL("${baseUrl}branches"))
+        val branches = getBranches(URL("${baseUrl}branches"))//getData<Branch>(URL("${baseUrl}branches"))
         branches.forEach {
-            val commits = getData<CommitInfo>(URL("${baseUrl}sha=${it.name}"))
+            val commits = getCommits(URL("${baseUrl}commits?per_page=$commitsQuantity&sha=${it.name}"))//getData<CommitInfo>(URL("${baseUrl}commits?per_page=100&sha=${it.name}"))
 
             commits.forEach { commit -> heap.tryToAdd(HeapItem(commit.commit.author.date, commit.commit.message)) }
         }
