@@ -1,4 +1,4 @@
-package modelsJson
+package models.json
 
 data class VerificationModel(
     val verified: Boolean?,

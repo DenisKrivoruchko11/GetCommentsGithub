@@ -1,4 +1,4 @@
-package modelsJson
+package models.json
 
 import com.google.gson.annotations.SerializedName
 import java.util.Date
