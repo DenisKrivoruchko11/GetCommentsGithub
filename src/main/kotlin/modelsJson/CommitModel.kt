@@ -1,4 +1,4 @@
-package jsonModels
+package modelsJson
 
 import com.google.gson.annotations.SerializedName
 
@@ -15,7 +15,7 @@ data class Commit(
     val tree: CommitData,
     @SerializedName("comment_count")
     val commentCount: Int,
-    val verification: verificationModel
+    val verification: VerificationModel
 )
 
 data class CommitInfo(

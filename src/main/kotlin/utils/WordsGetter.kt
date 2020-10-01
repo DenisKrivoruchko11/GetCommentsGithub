@@ -2,8 +2,8 @@ package utils
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import jsonModels.Branch
-import jsonModels.CommitInfo
+import modelsJson.Branch
+import modelsJson.CommitInfo
 import models.Heap
 import models.HeapItem
 import java.net.HttpURLConnection
